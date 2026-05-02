@@ -1,5 +1,7 @@
-package model;
+package by.psu.model;
 
+
+import by.psu.exception.TourServiceValidationException;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

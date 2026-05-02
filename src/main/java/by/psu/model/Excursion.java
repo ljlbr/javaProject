@@ -1,4 +1,4 @@
-package model;
+package by.psu.model;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -8,43 +8,52 @@ import java.time.format.DateTimeFormatter;
 
 public class Excursion extends TourService {
 
-    private String where;
-    private int day;
+    private String guideName;
+    private String excursionType;
+    private boolean lunchIncluded;
 
     public Excursion() {
         super();
     }
 
     public Excursion(Integer id, String name, BigDecimal price, LocalDate from, LocalDate to,
-                     String where, int day) {
+                     String guideName, String excursionType, boolean lunchIncluded) {
         super(id, name, price, from, to);
-        this.where = where;
-        this.day = day;
+        this.guideName = guideName;
+        this.excursionType = excursionType;
+        this.lunchIncluded = lunchIncluded;
     }
 
     @Override
     public BigDecimal calculateTotalPrice(int participants) {
         BigDecimal base = getPrice().multiply(BigDecimal.valueOf(participants));
-
         return participants > 10
                 ? base.subtract(base.divide(BigDecimal.valueOf(10), MathContext.DECIMAL128))
                 : base;
     }
 
-    public String getWhere() {
-        return where;
+    public String getGuideName() {
+        return guideName;
     }
 
-    public void setWhere(String where) {
-        this.where = where;
+    public void setGuideName(String guideName) {
+        this.guideName = guideName;
     }
 
-    public int getDay() {
-        return day;
+    public String getExcursionType() {
+        return excursionType;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setExcursionType(String excursionType) {
+        this.excursionType = excursionType;
+    }
+
+    public boolean isLunchIncluded() {
+        return lunchIncluded;
+    }
+
+    public void setLunchIncluded(boolean lunchIncluded) {
+        this.lunchIncluded = lunchIncluded;
     }
 
     @Override
@@ -58,8 +67,9 @@ public class Excursion extends TourService {
                 ", price=" + (getPrice() != null ? money.format(getPrice()) : "null") +
                 ", from=" + (getFrom() != null ? df.format(getFrom()) : "null") +
                 ", to=" + (getTo() != null ? df.format(getTo()) : "null") +
-                ", where=\"" + where + "\"" +
-                ", day=" + day +
+                ", guideName=\"" + guideName + "\"" +
+                ", excursionType=\"" + excursionType + "\"" +
+                ", lunchIncluded=" + lunchIncluded +
                 "}";
     }
 }
